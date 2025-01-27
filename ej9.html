@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de formularios con efectos</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Implementa un formulario que valide dinámicamente los campos ingresados por 
+    el usuario y muestre mensajes de error o confirmación según corresponda
+    - Los mensajes deben aparecer como notificaciones emergentes
+    - El formulario no debe enviarse si hay errores -->
+    <!-- Notificación emergente -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Formulario -->
+    <div class="container">
+        <h2>Formulario de Registro</h2>
+        <form id="formulario">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="email" id="email" placeholder="Correo electrónico" required>
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <button type="submit">Registrar</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+        // Función para mostrar notificaciones
+        function mostrarNotificacion(mensaje, tipo) {
+            $("#notification").text(mensaje).removeClass().addClass(`notification ${tipo}`).fadeIn();
+            setTimeout(function () {
+            $("#notification").fadeOut();
+            }, 3000);
+        }
+
+        // Validación de campos
+        $("#formulario").submit(function (e) {
+            e.preventDefault(); // Evitar el envío del formulario si hay errores
+
+            let valido = true;
+
+            // Validar campo Nombre
+            if ($("#nombre").val().trim() === "") {
+            $("#nombre").addClass("error");
+            mostrarNotificacion("El campo 'Nombre' es obligatorio.", "error");
+            valido = false;
+            } else {
+            $("#nombre").removeClass("error").addClass("success");
+            }
+
+            // Validar campo Email
+            let emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailRegEx.test($("#email").val().trim())) {
+            $("#email").addClass("error");
+            mostrarNotificacion("Por favor, ingresa un correo electrónico válido.", "error");
+            valido = false;
+            } else {
+            $("#email").removeClass("error").addClass("success");
+            }
+
+            // Validar campo Contraseña
+            if ($("#password").val().trim().length < 6) {
+            $("#password").addClass("error");
+            mostrarNotificacion("La contraseña debe tener al menos 6 caracteres.", "error");
+            valido = false;
+            } else {
+            $("#password").removeClass("error").addClass("success");
+            }
+
+            // Si todo es válido, enviar el formulario
+            if (valido) {
+            mostrarNotificacion("Formulario enviado correctamente.", "success");
+            }
+        });
+
+        // Limpiar clases de error/success cuando el usuario comienza a escribir
+        $("input").on("input", function () {
+            $(this).removeClass("error success");
+        });
+        });
+    </script>
+</body>
+</html>

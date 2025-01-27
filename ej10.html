@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menús contextuales interactivos</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Diseña un menú contextual que aparezca al hacer clic derecho en ciertas
+    áreas de la página. El menú debe contener opciones que interactúen dinámicamente
+    con el contenido de la página
+    - El menú debe desaparecer al hacer clic fuera de él
+    - Las opciones del menu deben realizar acciones como cambiar colores o mostrar elementos -->
+
+    <!-- Área donde el menú contextual aparecerá -->
+    <div class="contenido" id="area-clic">
+        <h2>Haz clic derecho aquí para el menú contextual</h2>
+        <p id="texto-oculto" class="elemento-oculto">Este es un texto oculto que puedes mostrar/ocultar.</p>
+    </div>
+
+    <!-- Menú contextual -->
+    <ul id="menu-contextual">
+        <li id="cambiar-color">Cambiar color de fondo</li>
+        <li id="mostrar-elemento">Mostrar/Ocultar texto</li>
+        <li id="cerrar-menu">Cerrar menú</li>
+    </ul>
+
+    <script>
+        $(document).ready(function () {
+        // Mostrar el menú contextual al hacer clic derecho
+        $("#area-clic").contextmenu(function (e) {
+            e.preventDefault(); // Prevenir el menú contextual predeterminado del navegador
+
+            // Posicionar el menú en el lugar del clic
+            $("#menu-contextual").css({
+            top: e.pageY + "px",
+            left: e.pageX + "px"
+            }).fadeIn(200); // Mostrar el menú con efecto de desvanecimiento
+        });
+
+        // Opción 1: Cambiar el color de fondo
+        $("#cambiar-color").click(function () {
+            $("body").css("background-color", "#a7d8c5"); // Cambiar el color de fondo
+            $("#menu-contextual").fadeOut(200); // Cerrar el menú
+        });
+
+        // Opción 2: Mostrar u ocultar un elemento
+        $("#mostrar-elemento").click(function () {
+            $("#texto-oculto").fadeToggle(200); // Alternar la visibilidad del texto
+            $("#menu-contextual").fadeOut(200); // Cerrar el menú
+        });
+
+        // Opción 3: Cerrar el menú
+        $("#cerrar-menu").click(function () {
+            $("#menu-contextual").fadeOut(200); // Cerrar el menú
+        });
+
+        // Cerrar el menú cuando el usuario hace clic fuera de él
+        $(document).click(function (e) {
+            if (!$(e.target).closest("#menu-contextual, #area-clic").length) {
+            $("#menu-contextual").fadeOut(200); // Cerrar el menú si se hace clic fuera de él
+            }
+        });
+        });
+    </script>
+
+</body>
+</html>

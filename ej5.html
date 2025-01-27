@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualización dinámica de imágenes</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Un sitio web de galería de imágenes necesita implementar un sistema donde las 
+    imágenes se muestren gradualmente cuando el usuario navegue por diferentes categorías
+    - Al hacer clic en una categoria, las imágenes relacionadas deben aparecer con un efecto visual
+    - Debe haber una opción para ocultar todas las imágenes visibles -->
+    
+    <style>
+        .galeria{
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .galeria img {
+            width: 150px;
+            height: 100px;
+            border: 2px solid #ccc;
+        }
+    </style>
+    <!-- Primero Creo una lista de categorías, las haré con botones -->
+    <div class="categorias">
+        <button data-category="animales">Animales</button>
+        <button data-category="coches">Coches</button>
+        <button data-category="box">Boxeadores</button>
+        <button id="ocultar">Ocultar todo</button>
+    </div>
+
+    <div class="galeria">
+        <!-- Imágenes de Animales -->
+        <img src="/img/anim1.jpg" alt="Animales" data-category="animales">
+        <img src="/img/anim2.jpg" alt="Animales" data-category="animales">
+        <!-- Imágenes Coches -->
+        <img src="/img/car1.jpg" alt="Coches" data-category="coches">
+        <img src="/img/car2.jpg" alt="Coches" data-category="coches">
+        <!-- Imágenes Boxeadores -->
+        <img src="/img/box1.avif" alt="Boxeadores" data-category="box">
+        <img src="/img/box2.avif" alt="Boxeadores" data-category="box">
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('.galeria img').hide(); //Ocultamos img
+
+            //Mostrar imágenes de ala categoría seleccionada
+            $('.categorias button').not('#ocultar').on('click', function(){
+                const category = $(this).data('category'); //Obtener categoría seleccionada
+
+                //Mostrar las imágenes
+                $('.galeria img').hide(); //Ocultamos img
+                $(`.galeria img[data-category="${category}"]`).fadeIn(500)
+            });
+
+            //Botón para ocultar todas las imágenes
+            $('#ocultar').on('click', function(){
+                $('.galeria img').fadeOut(300); //Ocultar todas las imagenes
+            })
+        })
+    </script>
+</body>
+</html>

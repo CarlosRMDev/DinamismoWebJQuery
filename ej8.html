@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de contenidos dinámicos</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Diseña una página donde el contenido de ciertos bloques de texto cambie
+    dinámicamente según la interacción del usuario con botones específicos
+    - Debe haber al menos tres bloques de contenido
+    - Los cambios en el contenido deben ser animados (efecto fade o slide) -->
+
+    <style>
+        .contenedor{
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+    </style>
+
+    <h1>Cambio de Conenido</h1>
+
+    <!-- Botones para cambiar el contenido -->
+    <button id="btn1">Bloque 1</button>
+    <button id="btn2">Bloque 2</button>
+    <button id="btn3">Bloque 3</button>
+
+    <!-- Bloques de contenido -->
+    <div class="contenedor">
+        <div class="bloque" id="bloque1">Contenido del Bloque 1</div>
+        <div class="bloque" id="bloque2">Contenido del Bloque 2</div>
+        <div class="bloque" id="bloque3">Contenido del Bloque 3</div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+        //Cambiar contenido del bloque 1
+        $("#btn1").click(function(){
+            $("#bloque1").fadeOut(300, function(){
+                $(this).html("Este es el nuevo contenido del bloque 2").slideDown(300);
+            });
+        });
+
+        // Cambiar contenido del Bloque 2
+        $("#btn2").click(function () {
+            $("#bloque2").slideUp(300, function () {
+            $(this).html("El contenido del Bloque 2 ha sido actualizado").slideDown(300);
+            });
+        });
+
+        // Cambiar contenido del Bloque 3
+        $("#btn3").click(function () {
+            $("#bloque3").fadeOut(300, function () {
+            $(this).html("Nuevo contenido dinámico para el Bloque 3").fadeIn(300);
+            });
+        });
+        });
+        
+
+    </script>
+</body>
+</html>

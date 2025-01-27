@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alternancia de estados visuales</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Un cliente necesita un formulario en el que ciertos campos aparezcan
+    solo cuando el usuario seleccione una opción específica de un desplegable.
+    El formulario debe ser limpio y dinámico. 
+    - El formulario debe ser compatible con todos los navegadores modernos
+    - Los campos deben aparecer o desaparecer con un efecto de deslizamiento -->
+
+    <!-- Formulario dinámico -->
+    <form action="" id="formulario">
+        <label for="opciones">Selecciona una opción:</label>
+        <select name="opciones" id="opciones">
+            <option value="ninguno">-- Selecciona --</option>
+            <option value="cliente">Soy cliente</option>
+            <option value="empresa">Soy una empresa</option>
+        </select>
+
+        <!-- Campos dinámicos -->
+        <div id="campo-cliente" style="display: none;">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre">
+        </div>
+
+        <div id="campo-empresa" style="display: none;">
+            <label for="empresa">Nombre de la empresa:</label>
+            <input type="text" id="empresa" name="empresa" placeholder="Nombre de la empresa">
+            <label for="cif">CIF:</label>
+            <input type="text" id="cif" name="cif" placeholder="CIF">
+        </div>
+    </form>
+
+    <!-- ahora el jquery -->
+    <script>
+    $(document).ready(function () {
+            $("#opciones").change(function () {
+            // Ocultamos todos los campos dinámicos al cambiar la opción
+            $("#campo-cliente, #campo-empresa").slideUp();
+
+            // Mostramos el campo correspondiente según la opción seleccionada
+            var seleccion = $(this).val();
+            if (seleccion === "cliente") {
+                $("#campo-cliente").slideDown();
+            } else if (seleccion === "empresa") {
+                $("#campo-empresa").slideDown();
+            }
+        });
+    });
+    </script>
+</body>
+</html>

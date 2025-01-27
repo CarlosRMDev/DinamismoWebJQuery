@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barra de progreso interactiva</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Crea una barra de progreso que avance dinámicamente cuando el usuario
+    haga clic en un botón o complete ciertas acciones en la página
+    - El avance de la barra debe ser suave y visualmente atractico
+    - Debe haber un botón para reiniciar la barra de progreso a cero -->
+
+    <style>
+        #barra-contenedor{
+            width: 100%;
+            background-color: #f3f3f3;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        #barra-progreso{
+            width: 0%;
+            height: 30px;
+            background-color: #4caf50;
+            text-align: center;
+            color: white;
+            line-height: 30px;
+            border-radius: 10px;
+        }
+    </style>
+
+    <h1>Barra de progreso</h1>
+    <div id="barra-contenedor">
+        <div id="barra-progreso">0%</div>
+    </div>
+
+
+    <!-- Botones de interacción -->
+    <button id="btn-avanzar">Avanzar</button>
+    <button id="btn-reiniciar">Reiniciar</button>
+
+    <script>
+        let progreso = 0; //Porcentaje inicial
+
+        //Función para avanzar la barra
+        $("#btn-avanzar").click(function(){
+            if (progreso < 100){ //Limitamos el progreso a 100
+                progreso += 10; //Incrementamos el progreso en 10%
+                actualizarBarra();
+            }
+        });
+
+        //Función para reiniciar la barra
+        $("#btn-reiniciar").click(function(){
+            progreso = 0; //Reiniciamos progreso
+            actualizarBarra();
+        });
+
+        //Función parar actualizar la barra visualmente
+        function actualizarBarra(){
+            $("#barra-progreso").stop().animate(
+                {
+                    width: progreso + "%" //Cambiamos el ancho dinámicamente
+                }, 
+                500, //Duración de la animación
+                function (){
+                    //Mostramos el texto del progreso dentro de la barra
+                    $("#barra-progreso").text(progreso + "%");
+                }
+            );
+        }
+    </script>
+</body>
+</html>

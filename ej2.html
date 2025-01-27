@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creación de efectos visuales y eventos</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Una empresa busca diseñar una página interactiva para mostrar un menú dinámico
+    que se despliegue y se contraiga según la interacción del usuario. El menú debe estar
+    inicialmente contraído y expandirse solo al hacer clic en un área específica
+    - Los elementos del menú deben cambiar de color al pasar el cursor sober ellos.
+    - Cada opción del menú debe  realizar una acción específica al hacer clic -->
+
+    <!-- Un poco de estilo -->
+    <style>
+    .lista{
+        display: none;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    .lista .item{
+        padding: 10px;
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #ccc;
+    }
+    
+    </style>
+    <!-- Creo un contenedor donde va a ir mi menú -->
+    <div class="container">
+    Menú desplegable
+    <ul class="lista">
+        <li class="item" id="inicio">Inicio</li>
+        <li class="item" id="prod">Productos</li>
+        <li class="item" id="carr">Carrito</li>
+        <li class="item" id="acer">Acerca de</li>
+    </ul>
+    </div>
+
+
+    <script>
+    $(".lista").hide();
+    $(".container").click(function(){
+        /*  Si usamos slidetoggle subirá y bajará alternativamente */
+        $(".lista").slideToggle();
+    });
+
+    //Hacemos un efecto para cambiar el color
+    $(".item").on({
+        mouseenter:function(){
+            $(this).css("background-color", "blue");
+        },
+        mouseleave:function(){
+            $(this).css("background-color", "#f2f2f2")
+        }
+    });
+    </script>
+</body>
+</html>

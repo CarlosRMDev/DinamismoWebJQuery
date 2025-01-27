@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de documentos dinámicos</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Un cliente te ha solicitado crear una página web que cargue ciertos
+    elementos solo cuando el documento esté completamente preparado. Además, algunos
+    de estos elementos deben permanecer ocultos inicialmente y aparecer gradualmente cuando el
+    usuario interactúe con ellos.
+    - La página debe tener un botón que, al pulsarlo, muestre todos los elementos ocultos
+    - El cliente desea que la transicion sea suave para mejorar la experiencia de usuario -->  
+
+    <!-- Creo una web sencilla con titulo subtitulo y texto, un botón arriba -->
+    <button id="boton">Mostrar elementos</button>
+    <div class="oculto">
+        <h1>Titulo</h1>
+        <h2>Subtitulo</h2>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Cum, itaque aut ipsam vel iste nobis assumenda aliquam molestiae
+            , voluptate nostrum dolores ipsum tempora error sapiente
+            aspernatur illum eius unde suscipit.
+        </p>
+    </div>
+
+    <script>
+        //Lo primero es preparar el documento para que todo esté oculto, hasta que pulse el botón
+        $(document).ready(function(){
+            $(".oculto").hide();
+            //Ahora ponemos la función del botón
+            $("#boton").click(function(){
+                $(".oculto").show(1500);
+            })
+            //Dentro del .show ponemos 1500 para que la transición se realice poco a poco
+        })
+    </script>
+</body>
+</html>

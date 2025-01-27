@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de eventos del teclado</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Diseña una página donde el usaurio pueda interactuar utilizando el teclado. La idea
+    es que, al presionar ciertas teclas, se activen diferentes funcinoes en el sitio
+    - Debe haber un cuadro de texto que cambie de color al escribir en él
+    - Al pulsar la tecla Enter, se debe mostrar un mensaje en la pantalla -->
+    <!-- Genero un cuadro de texto -->
+    <label for="entrada">Ecribe algo:</label>
+    <input type="text" id="entrada" placeholder="Escribe aquí">
+
+    <!-- Contenedor para el mensaje -->
+    <div id="mensaje" style="margin-top: 20px; font-size: 1,2rem; color: blue;"></div>
+
+    <script>
+        $(document).ready(function () {
+            // Cambiar el color del cuadro de texto al escribir
+            $("#entrada").on("input", function () {
+                $(this).css("background-color", getRandomColor());
+            });
+
+            // Detectar cuando se presiona Enter
+            $("#entrada").on("keypress", function (e) {
+                if (e.which === 13) { // Código de la tecla Enter
+                    $("#mensaje").text("¡Has presionado Enter!");
+                }
+            });
+
+        // Función para generar colores aleatorios
+        function getRandomColor() {
+            const letters = "0123456789ABCDEF";
+            let color = "#";
+            for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+            }
+        });
+    </script>
+</body>
+</html>
